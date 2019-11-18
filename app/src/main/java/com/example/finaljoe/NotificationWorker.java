@@ -1,23 +1,15 @@
 package com.example.finaljoe;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Build;
-import android.widget.ImageView;
-import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
-
-import com.example.finaljoe.MainActivity;
-import com.example.finaljoe.R;
-import com.squareup.picasso.Picasso;
 
 import static com.example.finaljoe.MainActivity.largeIcon;
 
