@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".AddDiapositivaActivity"></activity>
         <activity android:name=".StartPresentationActivity"></activity>
+
+        <service
+            android:name=".ChangeDiapositiveJob"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>

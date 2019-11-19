@@ -5,6 +5,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -19,8 +22,16 @@ import com.squareup.picasso.Picasso;
 
 import static com.example.finaljoe.yolActivity.path;
 
-public class StartPresentationActivity extends AppCompatActivity {
+public class StartPresentationActivity extends AppCompatActivity
+{
+
+    private ComponentName name;
+    private JobInfo changeDiapositive;
+    private JobScheduler scheduler;
+    private int timeToChangeDiapositive = 5;
+
     private static DiapositivaRepository repository;
+    public static int currentDiapositiva = 1;
     static final Integer READ_EXST = 0x4;
     TextView scriptview;
     ImageView image_prest;
@@ -32,15 +43,15 @@ public class StartPresentationActivity extends AppCompatActivity {
 
         askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,READ_EXST);
 
-
-
+        setDiapositiva();
+        /*
         image_prest = (ImageView) findViewById(R.id.image_prest);
 
         Log.d("image path",path);
 
         repository = new DiapositivaRepository(this.getApplication());
         Diapositiva diapositiva = new Diapositiva("","",0);
-        diapositiva.setDiapositivaId(1);
+        diapositiva.setDiapositivaId(2);
         diapositiva = repository.search(diapositiva);
 
         Log.d("image DB",diapositiva.diapositivaImage);
@@ -50,6 +61,23 @@ public class StartPresentationActivity extends AppCompatActivity {
 
         scriptview = findViewById(R.id.tex_script);
         scriptview.setText(diapositiva.diapositivaScript);
+
+        name = new ComponentName(this, ChangeDiapositiveJob.class);
+
+        changeDiapositive = new JobInfo.Builder(currentDiapositiva, name)
+                //.setPeriodic(int+1000)
+                //.setPersisted(true)
+                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                //.setRequiresBatteryNotLow(true)
+                //.setRequiresCharging(true)
+                //.setRequiresDeviceIdle(true)
+                //.setRequiresStorageNotLow(true)
+                .setMinimumLatency(timeToChangeDiapositive*1000).build();
+
+        scheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
+
+        scheduler.schedule(changeDiapositive);
+        */
     }
 
     private void askForPermission(String permission, Integer requestCode) {
@@ -114,6 +142,42 @@ public class StartPresentationActivity extends AppCompatActivity {
         scriptview = findViewById(R.id.tex_script);
         scriptview.setText(diapositiva.diapositivaScript);
     }
-    
+
      */
+    public void setDiapositiva()
+    {
+
+        image_prest = (ImageView) findViewById(R.id.image_prest);
+
+        Log.d("image path",path);
+
+        repository = new DiapositivaRepository(this.getApplication());
+        Diapositiva diapositiva = new Diapositiva("","",0);
+        diapositiva.setDiapositivaId(currentDiapositiva);
+        diapositiva = repository.search(diapositiva);
+
+        Log.d("image DB",diapositiva.diapositivaImage);
+        Picasso.get()
+                .load(Uri.parse(diapositiva.diapositivaImage))
+                .into(image_prest);
+
+        scriptview = findViewById(R.id.tex_script);
+        scriptview.setText(diapositiva.diapositivaScript);
+
+        name = new ComponentName(this, ChangeDiapositiveJob.class);
+
+        changeDiapositive = new JobInfo.Builder(currentDiapositiva, name)
+                //.setPeriodic(int+1000)
+                //.setPersisted(true)
+                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                //.setRequiresBatteryNotLow(true)
+                //.setRequiresCharging(true)
+                //.setRequiresDeviceIdle(true)
+                //.setRequiresStorageNotLow(true)
+                .setMinimumLatency(diapositiva.diapositivaTime*1000).build();
+
+        scheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
+
+        scheduler.schedule(changeDiapositive);
+    }
 }
