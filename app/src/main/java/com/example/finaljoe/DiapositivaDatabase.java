@@ -18,11 +18,13 @@ public abstract class DiapositivaDatabase extends RoomDatabase {
 
     public static synchronized DiapositivaDatabase getInstance(Context context){
         if (instance==null){
-            instance = Room.databaseBuilder(context.getApplicationContext(),
+            /*instance = Room.inMemoryDatabaseBuilder(context,
                     DiapositivaDatabase.class, "diapositiva_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
-                    .build();
+                    .build();*/
+            instance = Room.inMemoryDatabaseBuilder(context,
+                    DiapositivaDatabase.class).fallbackToDestructiveMigration().addCallback(roomCallback).build();
         }
         return instance;
     }
@@ -43,9 +45,9 @@ public abstract class DiapositivaDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            diapositivaDAO.insert(new Diapositiva( "Holi", "@mipmap/asdf",3));
-            diapositivaDAO.insert(new Diapositiva( "mi tema es", "@mipmap/asdf2",4));
-            diapositivaDAO.insert(new Diapositiva( "Jobs, threads y asynkTasks", "@mipmap/asdf3",5));
+            //diapositivaDAO.insert(new Diapositiva( "", "",0));
+//            diapositivaDAO.insert(new Diapositiva( "mi tema es", "@mipmap/asdf2",4));
+//            diapositivaDAO.insert(new Diapositiva( "Jobs, threads y asynkTasks", "@mipmap/asdf3",5));
             return null;
         }
     }

@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.example.finaljoe.StartPresentationActivity">
 
     <ImageView
         android:id="@+id/image_prest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_width="403dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/worker_small"/>
 
     <TextView
         android:id="@+id/tex_script"
@@ -22,6 +27,7 @@
         android:layout_marginStart="115dp"
         android:layout_marginTop="250dp"
         android:text="Previous"
+        android:onClick="toPrevious"
         android:id="@+id/b_prev"/>
 
     <Button
@@ -29,13 +35,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
-        android:text="Finish" />
+        android:text="Finish"
+        android:onClick="toMainMenu"/>
 
     <Button
         android:id="@+id/b_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
-        android:text="Thank u next" />
+        android:text="Next"
+        android:onClick="toNext"/>
 
 </LinearLayout>

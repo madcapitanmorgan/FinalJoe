@@ -63,7 +63,22 @@
             android:onClick="DownloadImage"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Get Image"
+            android:text="Load Image"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:visibility="invisible"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:background="@color/colorAccent"
+            android:onClick="GotoPrevScreen"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="Save"
             android:textAllCaps="false"
             android:textColor="#fff" />
 

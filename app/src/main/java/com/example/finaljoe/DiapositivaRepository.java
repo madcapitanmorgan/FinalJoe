@@ -36,6 +36,7 @@ public class DiapositivaRepository {
             return new SearchDiapositivaAsynkTask(diapositivaDAO).execute(diapositiva).get();
         }
        catch (Exception e){
+            Log.d("Exception pinche richi", "ex> "+e);
             return null;
        }
     }

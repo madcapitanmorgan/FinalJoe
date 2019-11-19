@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import android.widget.Button;
-
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,25 +15,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("Helloworld","Holi");
 
-        Button buttonAdd = findViewById(R.id.b_add);
-        Button buttonStart = findViewById(R.id.b_start);
-
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AddDiapositivaActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(MainActivity.this, StartPresentationActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
+    public void Start(View view) {
+        Intent intent = new Intent(MainActivity.this, StartPresentationActivity.class);
+        startActivity(intent);
+    }
+
+    public void Add(View view) {
+        Intent intent = new Intent(MainActivity.this,yolActivity.class);
+        startActivity(intent);
+        /*Intent intent = new Intent(this,yolActivity.class);
+        startActivity(intent);*/
+    }
 }

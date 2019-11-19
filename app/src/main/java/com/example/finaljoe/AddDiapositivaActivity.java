@@ -16,10 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.finaljoe.yolActivity.path;
+
 public class AddDiapositivaActivity extends AppCompatActivity {
 
     //public static final String EXTRA_SCRIPT = "com.example.FinalJoe.EXTRA_SCRIPT";
-
+    public static int contadorDiapositivas = 1;
     private EditText editTextScript;
     private EditText editTextImage;
     private EditText editTextTime;
@@ -35,6 +37,11 @@ public class AddDiapositivaActivity extends AppCompatActivity {
         editTextScript = findViewById(R.id.edit_text_script);
         editTextImage= findViewById(R.id.edit_text_imageName);
         editTextTime = findViewById(R.id.edit_text_time);
+
+        Diapositiva diapositiva = new Diapositiva("","",0);
+        diapositiva.setDiapositivaId(contadorDiapositivas++);
+        diapositiva = repository.search(diapositiva);
+        editTextImage.setText(path);
 
         Button buttonAdd2 = findViewById(R.id.b_add2);
 

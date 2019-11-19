@@ -7,6 +7,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,22 +28,26 @@ public class yolActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     public static ImageView ivIlls;
     public static Uri imageUri;
+    private static DiapositivaRepository repository;
+    public static String path;
 
     TextView tvStatus;
-    Button btnSend;
+    Button btnSend, btnOk;
     WorkManager mWorkManager;
     OneTimeWorkRequest mRequest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_yol);
 
-
+        repository = new DiapositivaRepository(this.getApplication());
         largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.worker_done);
 
         tvStatus = findViewById(R.id.tvStatus);
         btnSend = findViewById(R.id.btnSend);
+        btnOk = findViewById(R.id.btnOk);
         ivIlls = findViewById(R.id.ivIlls);
 
         mWorkManager = WorkManager.getInstance();
@@ -52,11 +57,13 @@ public class yolActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable WorkInfo workInfo) {
                 if (workInfo != null) {
+                    btnSend.setVisibility(View.GONE);
                     WorkInfo.State state = workInfo.getState();
                     tvStatus.append("\n " + state.toString());
                     Picasso.get()
-                            .load(imageUri)
+                            .load(Uri.parse(path))
                             .into(ivIlls);
+                    btnOk.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -76,7 +83,19 @@ public class yolActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
+            path = imageUri.toString();
+            System.out.println("Path> "+path);
             mWorkManager.enqueue(mRequest);
         }
+    }
+
+    public void GotoPrevScreen(View view) {
+        Intent intent = new Intent(this,AddDiapositivaActivity.class);
+        /*intent.putExtra("url",path);*/
+        startActivity(intent);
+        this.finish();
+        /*Diapositiva diapositiva = new Diapositiva("",path,0);
+        repository.insert(diapositiva);*/
+
     }
 }

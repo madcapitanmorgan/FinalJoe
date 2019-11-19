@@ -11,7 +11,7 @@ import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import static com.example.finaljoe.MainActivity.largeIcon;
+import static com.example.finaljoe.yolActivity.largeIcon;
 
 /**
  * Created on : Mar 26, 2019
@@ -28,7 +28,7 @@ public class NotificationWorker extends Worker {
     @Override
     public Result doWork() {
         Data taskData = getInputData();
-        String taskDataString = taskData.getString(MainActivity.MESSAGE_STATUS);
+        String taskDataString = taskData.getString(yolActivity.MESSAGE_STATUS);
 
         showNotification("WorkManager", taskDataString != null ? taskDataString : "Image has been loaded");
 
