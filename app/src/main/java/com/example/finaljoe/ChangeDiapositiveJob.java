@@ -33,6 +33,8 @@ public class ChangeDiapositiveJob extends JobService
         else
         {
             Toast.makeText(this,"Fin de la presentación",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
 
