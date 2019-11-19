@@ -71,6 +71,7 @@ public class StartPresentationActivity extends AppCompatActivity {
         }
     }
 
+    /*
     public void toPrevious(View view) {
         image_prest = (ImageView) findViewById(R.id.image_prest);
 
@@ -113,4 +114,6 @@ public class StartPresentationActivity extends AppCompatActivity {
         scriptview = findViewById(R.id.tex_script);
         scriptview.setText(diapositiva.diapositivaScript);
     }
+    
+     */
 }
