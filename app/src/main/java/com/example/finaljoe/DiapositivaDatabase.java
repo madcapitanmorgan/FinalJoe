@@ -43,9 +43,9 @@ public abstract class DiapositivaDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            diapositivaDAO.insert(new Diapositiva( "Holi", "@mipmap/asdf"));
-            diapositivaDAO.insert(new Diapositiva( "mi tema es", "@mipmap/asdf2"));
-            diapositivaDAO.insert(new Diapositiva( "Jobs, threads y asynkTasks", "@mipmap/asdf3"));
+            diapositivaDAO.insert(new Diapositiva( "Holi", "@mipmap/asdf",3));
+            diapositivaDAO.insert(new Diapositiva( "mi tema es", "@mipmap/asdf2",4));
+            diapositivaDAO.insert(new Diapositiva( "Jobs, threads y asynkTasks", "@mipmap/asdf3",5));
             return null;
         }
     }

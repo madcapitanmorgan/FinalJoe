@@ -19,10 +19,14 @@ public class Diapositiva {
     @ColumnInfo(name = "diapositiva_image")
     public String diapositivaImage;
 
+    @ColumnInfo(name = "diapositiva_time")
+    public int diapositivaTime;
 
-    public Diapositiva(String diapositivaScript, String diapositivaImage) {
+
+    public Diapositiva(String diapositivaScript, String diapositivaImage, int diapositivaTime) {
         this.diapositivaScript = diapositivaScript;
         this.diapositivaImage = diapositivaImage;
+        this.diapositivaTime = diapositivaTime;
     }
 
     public void setDiapositivaId(int diapositivaId) {
@@ -39,5 +43,8 @@ public class Diapositiva {
     }
     public String getDiapositivaImage(){
         return diapositivaImage;
+    }
+    public int getDiapositivaTime(){
+        return diapositivaTime;
     }
 }

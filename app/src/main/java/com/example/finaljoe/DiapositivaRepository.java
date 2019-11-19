@@ -2,6 +2,7 @@ package com.example.finaljoe;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -11,13 +12,14 @@ public class DiapositivaRepository {
     private DiapositivaDAO diapositivaDAO;
     private LiveData<List<Diapositiva>> allDiapositivas;
 
-    public DiapositivaRepository(Application application){
+    public  DiapositivaRepository(Application application){
         DiapositivaDatabase database = DiapositivaDatabase.getInstance(application);
         diapositivaDAO = database.diapositivaDAO();
-        allDiapositivas = diapositivaDAO.getAll();
+        //allDiapositivas = diapositivaDAO.getAll();
     }
 
-    public void inser(Diapositiva diapositiva){
+    public void insert(Diapositiva diapositiva){
+        Log.e("repository", diapositiva.diapositivaImage+" " + diapositiva.diapositivaTime+ " "+ diapositiva.diapositivaScript);
         new InsertDiapositivaAsynkTask(diapositivaDAO).execute(diapositiva);
     }
     public void update(Diapositiva diapositiva)
@@ -28,11 +30,43 @@ public class DiapositivaRepository {
     {
         new DeleteDiapositivaAsynkTask(diapositivaDAO).execute();
     }
-
-    public LiveData<List<Diapositiva>> getAllDiapositivas()
+    public Diapositiva search(Diapositiva diapositiva)
     {
-        return allDiapositivas;
+        try {
+            return new SearchDiapositivaAsynkTask(diapositivaDAO).execute(diapositiva).get();
+        }
+       catch (Exception e){
+            return null;
+       }
     }
+
+
+
+
+    private static class SearchDiapositivaAsynkTask extends AsyncTask<Diapositiva, Void , Diapositiva> {
+        private DiapositivaDAO diapositivaDAO;
+
+        private SearchDiapositivaAsynkTask(DiapositivaDAO diapositivaDAO)
+        {
+            this.diapositivaDAO = diapositivaDAO;
+        }
+
+        @Override
+        protected Diapositiva doInBackground(Diapositiva... diapositivas) {
+
+            //Diapositiva diapositiva= new Diapositiva("","", 0);
+            //diapositiva =  diapositivaDAO.search(diapositiva.diapositivaId).get(0);
+            Diapositiva diapositiva =  diapositivaDAO.search(diapositivas[0].diapositivaId);
+            return diapositiva;
+        }
+
+        @Override
+        protected void onPostExecute(Diapositiva diapositiva) {
+            super.onPostExecute(diapositiva);
+
+        }
+    }
+
 
     private static class InsertDiapositivaAsynkTask extends AsyncTask<Diapositiva, Void , Void> {
         private DiapositivaDAO diapositivaDAO;
