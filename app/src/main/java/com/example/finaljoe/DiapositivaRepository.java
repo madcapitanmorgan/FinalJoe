@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DiapositivaRepository {
     private DiapositivaDAO diapositivaDAO;
-    private LiveData<List<Diapositiva>> allDiapositivas;
+    private LiveData<List<Diapositiva>> allDiapositivas; //quitar
 
     public  DiapositivaRepository(Application application){
         DiapositivaDatabase database = DiapositivaDatabase.getInstance(application);

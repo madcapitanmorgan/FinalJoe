@@ -34,6 +34,7 @@ public class Diapositiva {
         this.diapositivaId = diapositivaId;
     }
     public int getId() {
+
         return diapositivaId;
     }
 
@@ -42,6 +43,7 @@ public class Diapositiva {
         return diapositivaScript;
     }
     public String getDiapositivaImage(){
+
         return diapositivaImage;
     }
     public int getDiapositivaTime(){

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +29,12 @@ public class StartPresentationActivity extends AppCompatActivity
     private ComponentName name;
     private JobInfo changeDiapositive;
     private JobScheduler scheduler;
-    private int timeToChangeDiapositive = 5;
+    //private int timeToChangeDiapositive = 5;
 
     private static DiapositivaRepository repository;
     public static int currentDiapositiva = 1;
     static final Integer READ_EXST = 0x4;
-    TextView scriptview;
+    //TextView scriptview;
     ImageView image_prest;
 
     @Override
@@ -157,12 +158,14 @@ public class StartPresentationActivity extends AppCompatActivity
         diapositiva = repository.search(diapositiva);
 
         Log.d("image DB",diapositiva.diapositivaImage);
+        //startRoot.setBackground(Drawable.createFromPath(diapositiva.diapositivaImage));
         Picasso.get()
                 .load(Uri.parse(diapositiva.diapositivaImage))
                 .into(image_prest);
 
-        scriptview = findViewById(R.id.tex_script);
-        scriptview.setText(diapositiva.diapositivaScript);
+        //scriptview = findViewById(R.id.tex_script);
+        //scriptview.setText(diapositiva.diapositivaScript);
+        Toast.makeText(this, "Title: " + diapositiva.diapositivaScript + ".", Toast.LENGTH_SHORT).show();
 
         name = new ComponentName(this, ChangeDiapositiveJob.class);
 

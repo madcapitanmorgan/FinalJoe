@@ -42,7 +42,6 @@ dependencies {
     // design and cardview
     implementation 'com.google.android.material:material:1.0.0-alpha1'
     implementation 'androidx.cardview:cardview:1.0.0'
-
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "android.arch.work:work-runtime:1.0.1"
@@ -54,7 +53,6 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.1'
     // recycler view
     //compile 'com.android.support:recyclerview-v7:28.0.0'
-
     //room
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'

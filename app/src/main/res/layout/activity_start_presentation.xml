@@ -5,24 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="com.example.finaljoe.StartPresentationActivity"
-    android:gravity="center"
-    android:padding="15dp">
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/image_prest"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_margin="30dp"
-        android:src="@drawable/worker_small"/>
-
-    <TextView
-        android:id="@+id/tex_script"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:layout_margin="15dp"
-        android:text="Script" />
-
-
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription"/>
 
 </LinearLayout>
