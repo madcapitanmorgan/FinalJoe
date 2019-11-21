@@ -33,8 +33,6 @@ public class yolActivity extends AppCompatActivity {
 
     TextView tvStatus;
     Button btnSend, btnOk;
-    WorkManager mWorkManager;
-    OneTimeWorkRequest mRequest;
 
 
     @Override
@@ -50,23 +48,6 @@ public class yolActivity extends AppCompatActivity {
         btnOk = findViewById(R.id.btnOk);
         ivIlls = findViewById(R.id.ivIlls);
 
-        mWorkManager = WorkManager.getInstance();
-        mRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class).build();
-
-        mWorkManager.getWorkInfoByIdLiveData(mRequest.getId()).observe(this, new Observer<WorkInfo>() {
-            @Override
-            public void onChanged(@Nullable WorkInfo workInfo) {
-                if (workInfo != null) {
-                    btnSend.setVisibility(View.GONE);
-                    WorkInfo.State state = workInfo.getState();
-                    tvStatus.append("\n " + state.toString());
-                    Picasso.get()
-                            .load(Uri.parse(path))
-                            .into(ivIlls);
-                    btnOk.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 
     public void DownloadImage(View view) {
@@ -85,17 +66,13 @@ public class yolActivity extends AppCompatActivity {
             imageUri = data.getData();
             path = imageUri.toString();
             System.out.println("Path> "+path);
-            mWorkManager.enqueue(mRequest);
         }
     }
 
     public void GotoPrevScreen(View view) {
         Intent intent = new Intent(this,AddDiapositivaActivity.class);
-        /*intent.putExtra("url",path);*/
         startActivity(intent);
         this.finish();
-        /*Diapositiva diapositiva = new Diapositiva("",path,0);
-        repository.insert(diapositiva);*/
 
     }
 }

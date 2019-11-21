@@ -26,10 +26,6 @@ import static com.example.finaljoe.yolActivity.path;
 public class StartPresentationActivity extends AppCompatActivity
 {
 
-    private ComponentName name;
-    private JobInfo changeDiapositive;
-    private JobScheduler scheduler;
-    //private int timeToChangeDiapositive = 5;
 
     private static DiapositivaRepository repository;
     public static int currentDiapositiva = 1;
@@ -45,40 +41,7 @@ public class StartPresentationActivity extends AppCompatActivity
         askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,READ_EXST);
 
         setDiapositiva();
-        /*
-        image_prest = (ImageView) findViewById(R.id.image_prest);
 
-        Log.d("image path",path);
-
-        repository = new DiapositivaRepository(this.getApplication());
-        Diapositiva diapositiva = new Diapositiva("","",0);
-        diapositiva.setDiapositivaId(2);
-        diapositiva = repository.search(diapositiva);
-
-        Log.d("image DB",diapositiva.diapositivaImage);
-        Picasso.get()
-                .load(Uri.parse(diapositiva.diapositivaImage))
-                .into(image_prest);
-
-        scriptview = findViewById(R.id.tex_script);
-        scriptview.setText(diapositiva.diapositivaScript);
-
-        name = new ComponentName(this, ChangeDiapositiveJob.class);
-
-        changeDiapositive = new JobInfo.Builder(currentDiapositiva, name)
-                //.setPeriodic(int+1000)
-                //.setPersisted(true)
-                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                //.setRequiresBatteryNotLow(true)
-                //.setRequiresCharging(true)
-                //.setRequiresDeviceIdle(true)
-                //.setRequiresStorageNotLow(true)
-                .setMinimumLatency(timeToChangeDiapositive*1000).build();
-
-        scheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
-
-        scheduler.schedule(changeDiapositive);
-        */
     }
 
     private void askForPermission(String permission, Integer requestCode) {
@@ -100,51 +63,6 @@ public class StartPresentationActivity extends AppCompatActivity
         }
     }
 
-    /*
-    public void toPrevious(View view) {
-        image_prest = (ImageView) findViewById(R.id.image_prest);
-
-        Log.d("image path",path);
-
-        repository = new DiapositivaRepository(this.getApplication());
-        Diapositiva diapositiva = new Diapositiva("","",0);
-        diapositiva.setDiapositivaId(1);
-        diapositiva = repository.search(diapositiva);
-
-        Log.d("image DB",diapositiva.diapositivaImage);
-        Picasso.get()
-                .load(diapositiva.diapositivaImage)
-                .into(image_prest);
-        //image_prest.setImageURI(Uri.parse(diapositiva.diapositivaImage));
-
-        scriptview = findViewById(R.id.tex_script);
-        scriptview.setText(diapositiva.diapositivaScript);
-    }
-
-    public void toMainMenu(View view) {
-        this.finish();
-    }
-
-    public void toNext(View view) {
-        image_prest = (ImageView) findViewById(R.id.image_prest);
-
-        Log.d("image path",path);
-
-        repository = new DiapositivaRepository(this.getApplication());
-        Diapositiva diapositiva = new Diapositiva("","",0);
-        diapositiva.setDiapositivaId(2);
-        diapositiva = repository.search(diapositiva);
-
-        Log.d("image DB",diapositiva.diapositivaImage);
-        Picasso.get()
-                .load(Uri.parse(diapositiva.diapositivaImage))
-                .into(image_prest);
-
-        scriptview = findViewById(R.id.tex_script);
-        scriptview.setText(diapositiva.diapositivaScript);
-    }
-
-     */
     public void setDiapositiva()
     {
 
@@ -167,20 +85,6 @@ public class StartPresentationActivity extends AppCompatActivity
         //scriptview.setText(diapositiva.diapositivaScript);
         Toast.makeText(this, "Title: " + diapositiva.diapositivaScript + ".", Toast.LENGTH_SHORT).show();
 
-        name = new ComponentName(this, ChangeDiapositiveJob.class);
 
-        changeDiapositive = new JobInfo.Builder(currentDiapositiva, name)
-                //.setPeriodic(int+1000)
-                //.setPersisted(true)
-                //.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                //.setRequiresBatteryNotLow(true)
-                //.setRequiresCharging(true)
-                //.setRequiresDeviceIdle(true)
-                //.setRequiresStorageNotLow(true)
-                .setMinimumLatency(diapositiva.diapositivaTime*1000).build();
-
-        scheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
-
-        scheduler.schedule(changeDiapositive);
     }
 }
